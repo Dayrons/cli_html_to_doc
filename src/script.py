@@ -31,9 +31,14 @@ def generate_report(template, file_output, variables):
 
             variables_dict = json.loads(variables)
             html = template.render(variables_dict)
+            
+            options =  {
+                'encoding': 'UTF-8',
+                'enable-local-file-access': True
+            }
 
             
-            pdfkit.from_string(html, export_path)
+            pdfkit.from_string(html, export_path, options=options)
             click.echo(click.style(f"Archivo PDF generado con éxito: {export_path}", fg='green'))
             
     except Exception as e:
